@@ -20,6 +20,8 @@ export class ModalWalksNewComponent implements OnInit {
   public formCaminhada!: FormGroup;
   public loadingTracker = false;
 
+  public currentDate = new Date().toISOString();
+
   constructor(
     private modalController: ModalController,
     private http: HttpClient
@@ -29,7 +31,7 @@ export class ModalWalksNewComponent implements OnInit {
     this.formCaminhada = new FormGroup({
       distance: new FormControl(!this.editingData ? '' : this.editingData.walk.distance),
       time: new FormControl(!this.editingData ? '': this.editingData.walk.time),
-      date: new FormControl(!this.editingData ? '': this.editingData.walk.date)
+      date: new FormControl(!this.editingData ? this.currentDate: this.editingData.walk.date)
     });
   }
 
