@@ -1,0 +1,103 @@
+ion-radio {
+    --color: var(--ion-color-primary-contrast);
+    --color-checked: var(--ion-color-primary-contrast);
+  }
+
+  form {
+    margin: 0 auto;
+    color: var(--ion-color-primary-contrast);
+    width: 85%;
+  }
+  
+  ion-button {
+    --color: var(--ion-color-primary-contrast);
+    --background: rgb(170, 97, 238);
+  }
+
+  .input-blank {
+    border-bottom: 1px solid var(--ion-color-primary-contrast);
+  }
+  
+  .btn-form-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .radio-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  
+    ion-item {
+      --background: var(--ion-color-primary);
+      --border-style: none;
+    }
+  
+    ion-item.selected {
+      --background: rgb(170, 97, 238);
+      --border-style: none;
+    }
+  
+    ion-radio {
+      margin: 0 0.75rem 0 0;
+    }
+  
+    ion-item {
+      border: 1px solid var(--ion-color-primary-contrast);
+      border-radius: 3px;
+      // padding: 1rem;
+      width: 45%;
+  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      ion-label {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+ion-segment {
+  margin: 0 auto;
+  width: 85%;
+}
+
+ion-segment-button.md {
+  --indicator-color: var(--ion-color-primary-contrast);
+  --color-checked: var(--ion-color-primary-contrast);
+}
+
+ion-segment-button.ios {
+  --color: var(--ion-color-primary-contrast);
+  --color-checked: var(--ion-color-primary-shade);
+}
+.hide-segment {
+  display: none; 
+}
+
+ion-button.button-outline::part(native) {
+  background-color: var(--ion-color-primary);
+}
+
+ion-datetime-button.time {
+  display: inline-block;
+}
+
+.time-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .radio-container {
+    flex-direction: column;
+    gap: 8px;
+    ion-item {
+      width: 100%;
+    }
+  }
+}

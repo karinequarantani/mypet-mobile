@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true">
+  <app-spinner *ngIf="loadingTracker"></app-spinner>
+  <ion-header class="header-page">
+    <ion-title>Registro de caminhadas</ion-title>
+    <ion-icon name="close-sharp" color="light" (click)="close()"></ion-icon>
+  </ion-header>
+  <div class="content">
+    <ion-list lines="none">
+      <!-- Multi-line sliding item with icon options on both sides -->
+      <ion-item-sliding #slidingItem *ngFor="let walk of walks; index as $index">
+        <ion-item >
+          <ion-label>
+            <h2 class="title-medicamento">
+              Distância: {{walk.distance}} metros
+              <ion-badge *ngIf="walk.date" color="warning">{{formatDate(walk.date)}}</ion-badge>
+            </h2>
+            <p>Duração: {{walk.time}} minutos</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="light" (click)="openModal($index,walk)">
+            <ion-icon slot="icon-only" color="primary" name="pencil-sharp"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="danger" (click)="removeMedicamento(walk)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="light" (click)="openModal(null, null)">
+      <ion-icon color="primary" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

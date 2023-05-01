@@ -1,0 +1,50 @@
+<ion-content [fullscreen]="true">
+  <app-spinner *ngIf="loadingTracker"></app-spinner>
+  <ion-header class="header-page">
+    <ion-title>Adicionar cirurgia</ion-title>
+    <ion-icon name="close-sharp" color="light" (click)="close()"></ion-icon>
+  </ion-header>
+
+  <div class="content">
+
+    <form [formGroup]="formCirurgia">
+      <ion-grid>
+        <ion-row>
+          <ion-col>Qual o nome da cirurgia?</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input class="input-blank" formControlName="name" required placeholder="Castração"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Qual o nome do veterinário?</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input class="input-blank" formControlName="vet" required placeholder="Luiz Silva - CRMV-SC 6587"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Quando foi realizado?</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-datetime-button datetime="date"></ion-datetime-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+      <ion-popover [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime formControlName="date" id="date" presentation="date" required></ion-datetime>
+        </ng-template>
+      </ion-popover>
+
+      <ion-button  expand="block" (click)="save()" [disabled]="formCirurgia.invalid"> Salvar </ion-button>
+
+    </form>
+  </div>
+
+</ion-content>

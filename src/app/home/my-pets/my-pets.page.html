@@ -1,0 +1,18 @@
+<ion-content [fullscreen]="true">
+    <app-spinner *ngIf="loadingTracker"></app-spinner>
+
+    <ion-header class="header-page">
+        <ion-menu-button menu="main-menu" autoHide="false"></ion-menu-button>
+        <ion-title>Meus pets</ion-title>
+    </ion-header>
+
+    <div class="content">
+        <app-card-list-item *ngFor="let pet of pets" [pet]="pet" (click)="openModal(pet)" >
+        </app-card-list-item>
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button color="light" (click)="addPet()">
+            <ion-icon color="primary" name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+    </div>
+</ion-content>

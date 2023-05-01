@@ -1,0 +1,51 @@
+<ion-content [fullscreen]="true">
+  <app-spinner *ngIf="loadingTracker"></app-spinner>
+  <ion-header class="header-page">
+    <ion-title>Adicionar caminhada</ion-title>
+    <ion-icon name="close-sharp" color="light" (click)="close()"></ion-icon>
+  </ion-header>
+
+  <div class="content">
+
+    <form [formGroup]="formCaminhada">
+      <ion-grid>
+        <ion-row>
+          <ion-col>Distância</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input class="input-blank" formControlName="distance" required type="number" placeholder="Metros"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Duração</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input class="input-blank" formControlName="time" required type="number" placeholder="Minutos"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Realizada em</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-datetime-button ion-datetime-button datetime="date"></ion-datetime-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+      <ion-popover [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime formControlName="date" id="date" presentation="date" required></ion-datetime>
+        </ng-template>
+      </ion-popover>
+
+      <ion-button  expand="block" (click)="save()" [disabled]="formCaminhada.invalid"> Salvar </ion-button>
+
+    </form>
+  </div>
+
+
+</ion-content>

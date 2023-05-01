@@ -1,0 +1,12 @@
+<ion-content [fullscreen]="true">
+  <app-spinner *ngIf="loadingTracker"></app-spinner>
+
+  <ion-header class="header-page">
+    <ion-menu-button menu="main-menu" autoHide="false"></ion-menu-button>
+    <ion-title>Caminhadas</ion-title>
+  </ion-header>
+
+  <div class="content">
+    <app-card-list-item *ngFor="let pet of pets" [pet]="pet" (click)="openModal(pet)" />
+  </div>
+</ion-content>

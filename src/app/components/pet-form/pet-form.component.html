@@ -1,0 +1,204 @@
+<app-spinner *ngIf="loadingTracker"></app-spinner>
+
+<ion-segment [value]="segment">
+  <ion-segment-button value="data" (click)="segment = 'data'">
+    <ion-label>Dados Básicos</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="rotine" (click)="segment = 'rotine'">
+    <ion-label>Rotinas</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<form [formGroup]="form">
+  
+  <div [ngClass]="segment === 'data' ? '' : 'hide-segment'">
+    <ion-grid>
+      <ion-row>
+        <ion-col>Qual o pet?</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-radio-group #radioTypeAnimal formControlName="breed" (ionChange)="changeTypeAnimal($event)">
+            <div class="radio-container">
+              <ion-item id="radio-canina">
+                <ion-label color="light">Cachorro</ion-label>
+                <ion-radio name="radio-dog" slot="start" value="canina" checked></ion-radio>
+              </ion-item>
+              <ion-item id="radio-felina">
+                <ion-label color="light">Gato</ion-label>
+                <ion-radio name="radio-cat" id="radio-cat" slot="start" value="felina"></ion-radio>
+              </ion-item>
+            </div>
+          </ion-radio-group>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Qual o sexo? </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-radio-group formControlName="gender" (ionChange)="changeTypeSex($event)">
+            <div class="radio-container">
+              <ion-item id="radio-sex-masculino">
+                <ion-label color="light">Macho</ion-label>
+                <ion-radio name="radio-sex-male" slot="start" value="masculino"></ion-radio>
+              </ion-item>
+              <ion-item id="radio-sex-feminina">
+                <ion-label color="light">Fêmea</ion-label>
+                <ion-radio name="radio-sex-female" id="radio-cat" slot="start" value="feminina">
+                </ion-radio>
+              </ion-item>
+            </div>
+          </ion-radio-group>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>O pet tem nome?</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class="input-blank" formControlName="name" placeholder="Caramelo" class="input-blank" required></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Qual a raça?</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class="input-blank" formControlName="specie" placeholder="Desconhecida" required></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Qual é a data de nascimento/adoção?</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-datetime-button datetime="birthday"></ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime formControlName="birthday" required [max]="currentDate" id="birthday" presentation="date"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" (click)="segment = 'rotine'">
+            Continuar
+            <ion-icon slot="end" name="caret-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  
+  <div [ngClass]="segment === 'rotine' ? '' : 'hide-segment'">
+    <ion-grid>
+      <ion-row>
+        <ion-col>Qual a quantidade o pet come por refeição?</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class="input-blank" formControlName="amount" placeholder="100g" class="input-blank"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Qual a marca da ração?</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class="input-blank" formControlName="rationBrand" placeholder="Royal Canan"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Qual o nome da ração?</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input class="input-blank" formControlName="feedName" placeholder="Adulto raças pequenas"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Quais horários irá comer?</ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col *ngIf="showFeedAmount > 0">
+          <div class="time-container">
+            <ion-icon name="trash" (click)="removeFeed('firstFeeding')"></ion-icon>
+            <ion-datetime-button datetime="firstFeeding" class="time"></ion-datetime-button>
+          </div>
+        </ion-col>
+        <ion-col *ngIf="showFeedAmount > 1">
+          <div class="time-container">
+            <ion-icon name="trash" (click)="removeFeed('secondFeeding')"></ion-icon>
+            <ion-datetime-button datetime="secondFeeding" class="time"></ion-datetime-button>
+          </div>
+        </ion-col>
+        <ion-col *ngIf="showFeedAmount < 2">
+          <div class="time-container">
+            <ion-button fill="outline" (click)="addFeed()">
+              <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>Quais horários irá caminhar?</ion-col>
+      </ion-row>
+      
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col *ngIf="showWalkAmount > 0">
+          <div class="time-container">
+            <ion-icon name="trash" (click)="removeWalk('firstWalk')"></ion-icon>
+            <ion-datetime-button datetime="firstWalk" class="time"></ion-datetime-button>
+          </div>
+        </ion-col>
+        <ion-col *ngIf="showWalkAmount > 1">
+          <div class="time-container">
+            <ion-icon name="trash" (click)="removeWalk('secondWalk')"></ion-icon>
+            <ion-datetime-button datetime="secondWalk" class="time"></ion-datetime-button>
+          </div>
+        </ion-col>
+        <ion-col *ngIf="showWalkAmount < 2">
+          <div class="time-container">
+            <ion-button fill="outline" (click)="addWalk()">
+              <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" expand="block" (click)="save()" [disabled]="form.invalid"> Salvar </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime formControlName="firstFeeding" id="firstFeeding" presentation="time"></ion-datetime>
+    </ng-template>
+  </ion-modal>
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime formControlName="secondFeeding" id="secondFeeding" presentation="time"></ion-datetime>
+    </ng-template>
+  </ion-modal>
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime formControlName="firstWalk" id="firstWalk" presentation="time"></ion-datetime>
+    </ng-template>
+  </ion-modal>
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime formControlName="secondWalk" id="secondWalk" presentation="time"></ion-datetime>
+    </ng-template>
+  </ion-modal>
+
+  <ion-button color="danger" *ngIf="showDeleteButton" (click)="remove()" type="submit" expand="block">
+    Excluir
+  </ion-button>
+</form>

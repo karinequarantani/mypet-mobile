@@ -1,0 +1,10 @@
+<ion-card>
+    <ion-img id="image" class="image" [src]="urlPictureSex"></ion-img>
+    <div class="pet-info-content">
+        <ion-label color="dark">{{pet.name}}</ion-label>
+        <ion-label class="info-pet breed" color="dark">{{pet.breed}}</ion-label>
+        <ion-badge *ngIf="pet.castrated" color="warning">Castrado</ion-badge>
+    </div>
+    <ion-img class="genre sex" [src]="urlSex"></ion-img>
+    <ion-img class="genre type" [src]="urlType"></ion-img>
+</ion-card>

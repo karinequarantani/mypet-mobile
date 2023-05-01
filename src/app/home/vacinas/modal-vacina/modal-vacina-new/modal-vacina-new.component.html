@@ -1,0 +1,57 @@
+<ion-content [fullscreen]="true">
+  <app-spinner *ngIf="loadingTracker"></app-spinner>
+  <ion-header class="header-page">
+    <ion-title>Adicionar vacina</ion-title>
+    <ion-icon name="close-sharp" color="light" (click)="close()"></ion-icon>
+  </ion-header>
+
+  <div class="content">
+
+    <form [formGroup]="formVacina">
+      <ion-grid>
+        <ion-row>
+          <ion-col>Qual o nome da vacina?</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input class="input-blank" formControlName="name" required placeholder="V10"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Quando foi aplicado?</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-datetime-button datetime="applicationDate"></ion-datetime-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Quando será a próxima aplicação?</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-datetime-button datetime="nextDate"></ion-datetime-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+      <ion-popover [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime min="1990-02" max="3000-12" id="applicationDate" formControlName="applicationDate" presentation="date" required></ion-datetime>
+        </ng-template>
+      </ion-popover>
+
+      <ion-popover [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime min="1990-02" max="3000-12" id="nextDate" formControlName="nextDate" presentation="date" required></ion-datetime>
+        </ng-template>
+      </ion-popover>
+
+      <ion-button  expand="block" (click)="save()" [disabled]="formVacina.invalid"> Salvar </ion-button>
+
+    </form>
+  </div>
+
+
+</ion-content>

@@ -1,0 +1,49 @@
+ion-card {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.875rem;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    ion-img {
+        margin-right: 0.875rem;
+    }
+
+    .pet-info-content {
+        ion-label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .info-pet {
+            &.breed {
+                font-size: 12px;
+            }
+            font-weight: 400;
+        }
+    }
+    .genre {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        margin-top: 0.875rem;
+        top: 0;
+        
+        &.sex {
+            right: 0;
+        }
+
+        &.type {
+            right: 25px;
+        }
+    }
+    .image {
+      max-width: 20%;
+    }
+    ion-img.image::part(image) {
+      border-radius: 100%;
+    }
+}

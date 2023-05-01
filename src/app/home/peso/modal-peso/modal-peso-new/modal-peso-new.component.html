@@ -1,0 +1,43 @@
+<ion-content [fullscreen]="true">
+  <app-spinner *ngIf="loadingTracker"></app-spinner>
+  <ion-header class="header-page">
+    <ion-title>Adicionar peso</ion-title>
+    <ion-icon name="close-sharp" color="light" (click)="close()"></ion-icon>
+  </ion-header>
+
+  <div class="content">
+
+    <form [formGroup]="formPeso">
+      <ion-grid>
+        <ion-row>
+          <ion-col>Qual é o peso?</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input class="input-blank" formControlName="weight" required type="number" placeholder="10"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Que dia foi pesado?</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-datetime-button ion-datetime-button datetime="date"></ion-datetime-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+      <ion-popover [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime formControlName="date" id="date" presentation="date" required></ion-datetime>
+        </ng-template>
+      </ion-popover>
+
+      <ion-button  expand="block" (click)="save()" [disabled]="formPeso.invalid"> Salvar </ion-button>
+
+    </form>
+  </div>
+
+
+</ion-content>
